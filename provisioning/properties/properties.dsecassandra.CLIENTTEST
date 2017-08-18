@@ -1,0 +1,21 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DATASTAX CASSANDRA
+
+# DOMAIN - Domain used for instance's FQDN
+DOMAIN='rs.3mhis.net'
+ENV='CLIENTTEST'
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=("redbox_default_linux","redbox_PROD_${ENV}_$AVAIL_ZONE")
+#PUPPET_GROUPS=("redbox_default_linux","redbox_DevINT-TEST001")
+
+# OPENSTACK OPTIONS
+OS_FLAVOR='5e340991-6d2d-42e7-aa8b-3fb660d5c538'
+OS_IMAGE='84af9909-60f9-49eb-882c-b13df4ad602c'
+#OS_TENANT_NAME='SOA-ClientTest'
+
+#OS_NETWORK='cec150ce-fde3-4800-bfbc-ccddd0ff33e2'
+OS_NETWORK='370c455f-bed9-4ea0-81cc-caa9d269be2b'
+#OS_SECURITY_GROUPS=('de56cc06-1ede-4841-a2e6-b6e45b6e1538')
+#OS_SECURITY_GROUPS=('a4a6e939-d647-41bc-99b4-d92fda1495b1')
+OS_KEYNAME='ProvisionSSH'

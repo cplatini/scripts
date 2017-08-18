@@ -1,0 +1,15 @@
+# CONFIG FILE FOR PROVISIONING
+# Nova authentivation information
+export OS_USERNAME="SOA-DI"
+export OS_PASSWORD="4zjdzamk4gwz#B"
+export OS_TENANT_NAME="SOA-DI"
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+# The following lines can be omitted
+export OS_TENANT_ID="10e8e3562e214c2a8c82104eb5147f59"
+export NOVACLIENT_INSECURE=1
+
+# Variables below are found in the set_qa.env file
+# ENV & SSH provisioning tasks
+# export PAT_IPADDR="72.3.199.165"
+# export ENV_NAME="dev_int"
+# export ENV_PK_NAME=devint_key.pem

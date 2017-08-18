@@ -1,0 +1,113 @@
+###########################################
+# SCRIPT INFORMATION
+###########################################
+# ssh_sgden1.sub
+# Example: source "ssh_sgden1.sub"
+#
+# This script is a sub-script for make_default.sh
+#
+# Location configuration for host
+# DOMAIN='ssh_raxdfw.sub' -or-
+# DOMAIN='ssh_sgden1.sub'
+###########################################
+# VARS
+# DESCRIPTION:
+# Setting some variables for use in the script
+###########################################
+
+# Sungard RHEL Repo
+read -d '' rhel_repo <<"EOF"
+[sg-rhel]
+name=SG-RHEL
+baseurl=http://repo-01.sys.sgden1.3mhis.net/redhat
+enabled=1
+gpgcheck=0
+EOF
+
+# Sungard EPEL Repo
+read -d '' epel_repo <<"EOF"
+[sg-epel]
+name=SG-EPEL
+baseurl=http://repo-01.sys.sgden1.3mhis.net/epel
+enabled=1
+gpgcheck=0
+EOF
+
+# Sungard OSS_Tools JSON
+read -d '' oss_tool_json <<__EOF__
+={
+  '"'host'"': '"'$HOST_NAME'"',
+  '"'ip_address'"': '"'$sgas_mgmt_ipaddr'"',
+  '"'host_type'"': '"'linux'"'
+}
+__EOF__
+
+###########################################
+# hosts, resolv.conf, and dhclient-eth0.conf Configuration
+# DESCRIPTION:
+# Updating hosts, resolv.conf, and dhclient-eth0.conf files
+# restart the guest-os network
+###########################################
+echo -e "[INFO]: Disable SELinux, Updating hosts, resolv.conf, and dhclient-eth0.conf file, and restarting the network."
+ssh ${ssh_string} 'bash -s' <<__ENDSSH__
+  echo "Disabling SELinux Enforce"
+  sudo echo 0 > /selinux/enforce
+  echo "Adding FQDN in/etc/hosts"
+  sudo echo "${instance_ipaddr} ${FQDN} ${HOST_NAME}" | sudo tee -a /etc/hosts
+  echo "Adding netservices, fileservices, and puppet to /etc/hosts"
+  sudo echo '172.16.180.254   netservices-01.dfw.3mhis.vm' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.191   fileservices-01.dfw.3mhis.vm' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.16    puppet-console.sys.raxdfw.3mhis.net' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.127   puppet-master-01.sys.raxdfw.3mhis.net puppet-master' | sudo tee -a /etc/hosts
+  sudo echo '10.4.1.15        puppet-master-01.sys.sgden1.3mhis.net' | sudo tee -a /etc/hosts
+  sudo echo '10.10.18.206     repo-01.sys.sgden1.3mhis.net repo-01.sgden.3mhis.net' | sudo tee -a /etc/hosts
+  echo "Adding nameserver to /etc/resolv.conf"
+  sudo echo 'nameserver 10.10.18.29' | sudo tee -a /etc/resolv.conf
+  sudo echo 'nameserver 10.10.18.30' | sudo tee -a /etc/resolv.conf
+  echo "Fixing dhclient to ensure nameserver"
+  sudo echo 'prepend domain-name-servers 10.10.18.29, 10.10.18.30;' | sudo tee -a /etc/dhcp/dhclient-eth0.conf
+  sudo echo "supersede domain-name \"$SDLC_DOMAIN\";" | sudo tee -a /etc/dhcp/dhclient-eth0.conf
+  echo "Permanently set the hostname"
+  sudo /bin/sed -i "s/HOSTNAME=.*/HOSTNAME=${HOST_NAME}/g" /etc/sysconfig/network
+  echo "Adding Sungard Repos"
+  sudo echo "${rhel_repo}" | sudo tee -a /etc/yum.repos.d/sg-rhel.repo
+  sudo echo "${epel_repo}" | sudo tee -a /etc/yum.repos.d/sg-epel.repo
+  echo "Placing OSS_Tools Registration JSON"
+  sudo echo "${oss_tool_json}" | sudo tee -a /tmp/oss_tools.json
+  echo "Restart network"
+  sudo /etc/init.d/network restart
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+
+###########################################
+## Install Puppet Agent
+## DESCRIPTION:
+## Deactivate, and clean node within Puppet Dashboard
+## Download and install Puppet Agent
+## AUTOMATIC: sudo puppet cert sign ${FQDN}
+############################################
+echo -e "[INFO]: Create the node within Puppet Dashboard"
+ssh ${ssh_puppet_console} 'bash -s' <<__ENDSSH__
+  sudo puppet cert clean ${FQDN}
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+
+# Download and install Puppet Agent
+echo -e "[INFO]: Registering OSS_Tools and Installing Puppet."
+ssh ${ssh_string} 'bash -s' <<"__ENDSSH__"
+  echo -e "Registering OSS_Tools"
+  curl --max-time 60 http://10.10.221.250/api/provisioning -X POST -H "Content-Type: application/x-www-form-urlencoded" --data @/tmp/oss_tools.json
+  echo -e "[INFO]: 5 minutes for subscription-manager"
+  sleep 5m
+  sudo subscription-manager refresh
+  sudo subscription-manager attach --auto
+  echo -e "Check yum update for ca-certificates"
+  sudo /usr/bin/yum update -y ca-certificates
+  echo -e "Installing Puppet Agent"
+  sudo /usr/sbin/ntpdate -u 10.10.18.29
+  curl -k https://puppet-master-01.sys.sgden1.3mhis.net:8140/packages/current/install.bash | sudo bash -s agent:pluginsignore=.svn 
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?

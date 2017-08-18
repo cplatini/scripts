@@ -1,0 +1,52 @@
+#!/bin/bash
+###########################################
+# DEBUGGING
+###########################################
+# /bin/sh (usually is a sybolic link to bash)
+# /usr/bin/bash
+# /usr/bin/env bash
+# Debugging: set -x
+# set -x   # Print a trace of simple commands and their arguments
+###########################################
+# SCRIPT INFORMATION
+###########################################
+# Select the disk device and chose a label for the partition
+###########################################
+# FUNCTION: to_lower
+# DESCRIPTION: Check value is empty 
+# Parameters: 
+#   $1 = value to check
+#   $1 convert to lower case
+###########################################
+function to_lower() {
+  t_param=$1
+  # Check value is not empty, for speed.
+  if [[ -z "${t_param}" ]]; then
+    #return 0, is empty, but we don't care
+    return 0
+  fi
+  # Convert to lower case
+  echo -e "${t_param}" | tr '[:upper:]' '[:lower:]' | xargs 2>/dev/null
+  #return 0, we don't care
+  return 0
+}
+
+TESTING="THIS IS A TEST"
+HOSTNAME='NLPD-PR-00001'
+
+echo "Changing variables from upper to lower case."
+echo -e "\n================================\n"
+echo -e "BEFORE:"
+echo -e "${TESTING}"
+echo -e "${HOSTNAME}"
+echo -e "\n================================\n"
+
+TESTING=$(to_lower "${TESTING}")
+HOSTNAME=$(to_lower "${HOSTNAME}")
+
+echo -e "AFTER:"
+echo -e "${TESTING}"
+echo -e "${HOSTNAME}"
+echo -e "\n================================"
+
+echo -e "[ Done ]"

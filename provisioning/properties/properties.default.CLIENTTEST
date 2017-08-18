@@ -1,0 +1,21 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DEFAULT
+
+#DOMAIN - Domain used for instance's FQDN
+#DOMAIN='rs.3mhis.net'
+#ENV='CLIENTTEST'
+
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=('redbox_default_linux',"redbox_PROD_${ENV_NAME}_$AVAIL_ZONE")
+NLPD_GROUP=('redbox_CT_NlpdEngine','soa_linux_nlp_auth')
+NLPR_GROUP=('redbox_CT_NlprEngine','soa_linux_nlp_auth')
+
+# OPENSTACK OPTIONS
+# OS_IMAGE, This is set to CentOS 6
+OS_IMAGE='84af9909-60f9-49eb-882c-b13df4ad602c'
+
+# OS_Network: Which network ID should the VM be built in
+OS_NETWORK='cec150ce-fde3-4800-bfbc-ccddd0ff33e2'
+OS_SECURITY_GROUPS=('f0e6df8a-31e3-46ce-b5fd-447f61a227f1');
+OS_KEYNAME='ProvisionSSH'

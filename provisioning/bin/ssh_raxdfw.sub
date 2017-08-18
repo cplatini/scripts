@@ -1,0 +1,115 @@
+###########################################
+# SCRIPT INFORMATION
+###########################################
+# ssh_raxdfw.sub
+# Example: source "ssh_raxdfw.sub"
+#
+# This script is a sub-script for make_default.sh
+#
+# Location configuration for host
+# DOMAIN='ssh_raxdfw.sub' -or-
+# DOMAIN='ssh_sgden1.sub'
+###########################################
+# hosts, resolv.conf, and dhclient-eth0.conf Configuration
+# DESCRIPTION: 
+# Updating hosts, resolv.conf, and dhclient-eth0.conf files
+# restart the guest-os network
+###########################################
+echo -e "[INFO]: Updating hosts, resolv.conf, and dhclient-eth0.conf file, and restarting the network."
+ssh ${ssh_string} 'bash -s' <<__ENDSSH__
+  echo "Adding FQDN in/etc/hosts"
+  sudo echo "${instance_ipaddr} ${FQDN} ${HOST_NAME}" | sudo tee -a /etc/hosts
+  echo "Adding netservices, fileservices, and puppet to /etc/hosts"
+  sudo echo '172.16.180.254 netservices-01.dfw.3mhis.vm' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.191 fileservices-01.dfw.3mhis.vm' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.16 puppet-console.sys.raxdfw.3mhis.net' | sudo tee -a /etc/hosts
+  sudo echo '172.16.180.127 puppet-master-01.sys.raxdfw.3mhis.net' | sudo tee -a /etc/hosts
+  echo "Adding nameserver to /etc/resolv.conf"
+  sudo echo 'nameserver 172.16.180.254' | sudo tee -a /etc/resolv.conf
+  echo "Fixing dhclient to ensure nameserver"
+  sudo echo 'prepend domain-name-servers 172.16.180.254;' | sudo tee -a /etc/dhcp/dhclient-eth0.conf
+  sudo echo "supersede domain-name \"$SDLC_DOMAIN\";" | sudo tee -a /etc/dhcp/dhclient-eth0.conf
+  echo "Restart network"
+  sudo /etc/init.d/network restart
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+###########################################
+# Update hostname in /etc/sysconfig/network
+# DESCRIPTION: 
+# Updating the /etc/sysconfig/network file
+###########################################
+echo -e "[INFO]: Update hostname in /etc/sysconfig/network"
+ssh ${ssh_string} 'bash -s' <<__ENDSSH__
+  echo "Permanently set the hostname"
+  sudo /bin/sed -i "s/HOSTNAME=.*/HOSTNAME=${HOST_NAME}/g" /etc/sysconfig/network
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+###########################################
+# iptables Configuration
+# DESCRIPTION: 
+# Stop iptables
+# Disable iptables
+###########################################
+# Disable iptables
+echo -e "[INFO]: Disabling iptables."
+ssh ${ssh_string} 'bash -s' <<"__ENDSSH__"
+  echo "Stop and disable iptables"
+  sudo /sbin/service iptables stop
+  sudo /sbin/chkconfig iptables off
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+###########################################
+# EPEL Repo & ALERTLOGIC
+# DESCRIPTION: 
+# Check yum update for ca-certificates
+# Download and install the EPEL 6.8 repo
+# http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+# Install Alert Logic Threatmanager and Logmanager agent
+###########################################
+echo -e "[INFO]: Setting up Alert Logic Threatmanager and Logmanager Agents."
+ssh ${ssh_string} 'bash -s' <<"__ENDSSH__"
+  echo -e "Check yum update for ca-certificates"
+  sudo /usr/bin/yum update -y ca-certificates
+  echo -e "Download and install the EPEL 6.8 repo"
+  /usr/bin/wget -D dl.fedoraproject.org "https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+  sudo /usr/bin/yum -y install /home/cloud-user/epel-release-6-8.noarch.rpm
+  echo -e "Installing the Alert Logic Threatmanager Agent"
+  /usr/bin/wget -D netservices-01.dfw.3mhis.vm -q "ftp://netservices-01.dfw.3mhis.vm/pub/soa/rpms/al-threat-host_LATEST.x86_64.rpm"
+  sudo rpm -i /home/cloud-user/al-threat-host_LATEST.x86_64.rpm
+  sudo /etc/init.d/al-threat-host configure --host vaporator.alertlogic.com
+  sudo /etc/init.d/al-threat-host provision --key 00c69ea46bf6f030ebb6411f17231c822ad4fa2cea6905a831
+  sudo /etc/init.d/al-threat-host start
+  echo -e "Installing the Alert Logic Logmanager Agent"
+  /usr/bin/wget -D netservices-01.dfw.3mhis.vm -q "ftp://netservices-01.dfw.3mhis.vm/pub/soa/rpms/al-log-agent-LATEST-1.x86_64.rpm"
+  sudo rpm -i /home/cloud-user/al-log-agent-LATEST-1.x86_64.rpm
+  sudo /etc/init.d/al-log-agent configure --host vaporator.alertlogic.com
+  sudo /etc/init.d/al-log-agent provision --key 00c69ea46bf6f030ebb6411f17231c822ad4fa2cea6905a831
+  sudo /etc/init.d/al-log-agent start
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+###########################################
+# Install Puppet Agent
+# DESCRIPTION: 
+# Deactivate, and clean node within Puppet Dashboard
+# Download and install Puppet Agent
+# AUTOMATIC: sudo puppet cert sign ${FQDN}
+# sudo puppet node clean ${FQDN}
+###########################################
+echo -e "[INFO]: Create the node within Puppet Dashboard"
+ssh ${ssh_puppet_console} 'bash -s' <<__ENDSSH__
+  sudo puppet cert clean ${FQDN}
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?
+
+# Download and install Puppet Agent
+echo -e "[INFO]: Installing Puppet Agent."
+ssh ${ssh_string} 'bash -s' <<"__ENDSSH__"
+  curl -k https://puppet-master-01.sys.raxdfw.3mhis.net:8140/packages/current/install.bash | sudo bash -s agent:pluginsignore=.svn
+  echo "[DONE]"
+__ENDSSH__
+check_exit_status $?

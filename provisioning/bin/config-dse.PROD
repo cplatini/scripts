@@ -1,0 +1,11 @@
+# CONFIG FILE FOR PROVISIONING
+
+PAT_IPADDR="74.205.49.132"
+
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+#export OS_TENANT_ID="d2b07b151f67479eb6f8bbc472dc157c"
+export OS_TENANT_NAME="SOA-Production"
+export OS_USERNAME="SOA-PROD"
+export OS_PASSWORD="5wEk5br+v#TruP#P"
+
+ENV_PK_NAME=private_key.pem

@@ -1,0 +1,38 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DEFAULT
+
+# DOMAIN - Domain used for instance's FQDN
+
+DOMAIN='sgden1.3mhis.net'
+
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=('soa_linux_local_basics',"redbox_PROD_${ENV_NAME}_$AVAIL_ZONE")
+NLPD_GROUP=('redbox_DI2_NlpdEngine','soa_linux_nlp_auth')
+NLPR_GROUP=('redbox_DI2_NlprEngine','soa_linux_nlp_auth')
+
+# OPENSTACK OPTIONS
+#OS_FLAVOR='53'
+#OS_FLAVOR='5e340991-6d2d-42e7-aa8b-3fb660d5c538'
+
+# Image
+## RHEL6 v2
+OS_IMAGE='258e3dae-da6d-4e3f-9903-a06e20d28862'
+
+
+# OS_Network: Which network ID should the VM be built in
+## QA-APP: 476fc512-7899-4ea8-a7aa-cf4cc0bf6cfc
+OS_NETWORK='b15be2f1-81b1-4723-a12d-9ef96d365ed6'
+
+# QA-DB: 73771ee3-06dd-4714-9ca5-534507fa2f4e
+#OS_NETWORK='73771ee3-06dd-4714-9ca5-534507fa2f4e'
+
+# QA-BigData: 3b5e295b-8405-4eb7-90f4-022deee5e68c
+#OS_NETWORK='3b5e295b-8405-4eb7-90f4-022deee5e68c'
+
+# | 9bb539e8-42ea-4f10-b5b4-eababd7afddf | R4-INTERFACEDI2  | None |
+#OS_NETWORK='9bb539e8-42ea-4f10-b5b4-eababd7afddf'
+
+OS_SECURITY_GROUPS=('default')
+
+OS_KEYNAME='ProvisionSSH'

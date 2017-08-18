@@ -1,0 +1,13 @@
+# CONFIG FILE FOR PROVISIONING
+# Nova authentivation information
+export OS_USERNAME="api-3MDI"
+export OS_PASSWORD='q+Frewra$hech7c'
+export OS_TENANT_ID="89b452122f664f64ab97bbed4c6f795b"
+#export OS_TENANT_NAME="3M-Dev"
+export OS_AUTH_URL="https://10.10.224.10:5000/v2.0"
+#export OS_AUTH_STRATEGY="keystone"
+export OS_NO_CACHE=1
+# The following lines can be omitted
+# export OS_TENANT_ID="e47bb36a5aae48eab97e68601af29d3e"
+# export NOVACLIENT_INSECURE=1
+# Other variables are found in the set_di2.env file

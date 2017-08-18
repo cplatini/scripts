@@ -1,0 +1,14 @@
+# CONFIG FILE FOR PROVISIONING
+
+# PROVIDE PROVISION ROOT
+P_ROOT=/home/drainwater/provisioning
+
+source $P_ROOT/inc/*
+
+PAT_IPADDR="67.192.44.109"
+
+export OS_AUTH_URL="https://162.209.69.58:5000/v2.0"
+export OS_TENANT_ID="23b8b465f41c4567b7cf5621d3d29668"
+export OS_TENANT_NAME="3M-DevINT"
+export OS_USERNAME="3M-DevINT"
+export OS_PASSWORD="zaJu&e8t@hUGA&u7"

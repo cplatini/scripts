@@ -1,0 +1,12 @@
+# CONFIG FILE FOR PROVISIONING
+# Nova authentivation information
+export OS_USERNAME="SOA-QA"
+export OS_PASSWORD="s3fmffOAYu3#"
+export OS_TENANT_NAME="SOA-QA"
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+export OS_AUTH_STRATEGY="keystone"
+export OS_NO_CACHE=1
+# The following lines can be omitted
+# export OS_TENANT_ID="10766f49bf44482aadb6f4091a932f06"
+# export NOVACLIENT_INSECURE=1
+# Other variables are found in the set_qa.env file

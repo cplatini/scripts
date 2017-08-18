@@ -1,0 +1,9 @@
+PAT_IPADDR="72.3.199.164"
+
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+export OS_TENANT_ID="10e8e3562e214c2a8c82104eb5147f59"
+export OS_TENANT_NAME="SOA-DI"
+export OS_USERNAME="SOA-DI"
+export OS_PASSWORD="4zjdzamk4gwz#B"
+
+ENV_PK_NAME=devint_key.pem

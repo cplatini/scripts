@@ -1,0 +1,19 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DATASTAX CASSANDRA
+
+# DOMAIN - Domain used for instance's FQDN
+DOMAIN='rs.3mhis.net'
+ENV='DI2'
+
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=("redbox_default_linux","redbox_PROD_${ENV}_$AVAIL_ZONE")
+
+# OPENSTACK OPTIONS
+OS_FLAVOR='f44d1d61-5d2e-4c27-b96d-803724a7451f' # DSE Flavor
+#OS_FLAVOR='6e71a044-cbff-4373-abb2-c90e80a89226' # Hadoop Flavor
+OS_IMAGE='84af9909-60f9-49eb-882c-b13df4ad602c'
+
+OS_NETWORK='c4b94e21-e1d8-4704-931c-ac3adc819341'
+
+OS_KEYNAME='ProvisionSSH'

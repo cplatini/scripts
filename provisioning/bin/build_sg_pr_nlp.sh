@@ -1,0 +1,199 @@
+#!/bin/bash
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20001 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20001.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20002 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20002.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20003 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20003.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20004 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20004.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20005 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20005.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20006 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20006.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20007 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20007.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20008 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20008.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20009 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20009.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20010 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20010.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20011 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20011.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20012 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20012.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20013 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20013.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20014 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20014.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20015 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20015.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20016 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20016.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20017 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20017.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20018 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20018.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20019 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20019.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20020 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20020.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20021 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20021.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20022 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20022.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20023 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20023.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20024 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20024.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20025 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20025.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20026 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20026.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20027 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20027.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20028 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20028.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20029 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20029.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20030 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20030.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20031 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20031.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20032 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20032.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20033 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20033.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20034 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20034.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20035 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20035.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20036 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20036.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20037 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20037.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20038 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20038.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20039 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20039.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20040 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20040.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20041 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20041.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20042 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20042.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20043 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20043.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20044 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20044.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20045 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20045.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20046 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20046.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20047 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20047.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20048 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20048.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20049 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20049.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20050 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20051 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20051.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20052 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20052.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20053 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20053.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20054 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20054.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20055 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20055.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20056 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20056.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20057 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20057.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20058 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20058.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20059 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20059.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20060 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20061 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20061.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20062 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20062.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20063 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20063.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20064 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20064.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20065 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20065.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20066 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20066.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20067 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20067.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20068 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20068.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20069 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20069.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20070 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20071 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20071.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20072 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20072.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20073 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20073.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20074 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20074.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20075 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20075.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20076 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20076.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20077 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20077.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20078 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20078.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20079 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20079.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20080 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20081 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20081.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20082 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20082.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20083 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20083.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20084 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20084.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20085 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20085.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20086 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20086.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20087 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20087.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20088 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20088.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20089 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20089.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20090 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20091 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20091.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20092 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20092.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20093 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20093.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20094 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20094.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20095 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20095.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20096 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20096.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20097 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20097.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20098 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20098.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20099 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20099.out &
+./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20100 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20101 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20101.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20102 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20102.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20103 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20103.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20104 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20104.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20105 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20105.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20106 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20106.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20107 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20107.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20108 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20108.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20109 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20109.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20110 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20111 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20111.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20112 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20112.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20113 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20113.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20114 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20114.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20115 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20115.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20116 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20116.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20117 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20117.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20118 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20118.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20119 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20119.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20120 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20121 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20121.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20122 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20122.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20123 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20123.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20124 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20124.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20125 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20125.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20126 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20126.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20127 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20127.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20128 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20128.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20129 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20129.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20130 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20131 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20131.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20132 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20132.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20133 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20133.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20134 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20134.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20135 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20135.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20136 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20136.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20137 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20137.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20138 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20138.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20139 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20139.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20140 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20141 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20141.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20142 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20142.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20143 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20143.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20144 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20144.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20145 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20145.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20146 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20146.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20147 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20147.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20148 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20148.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20149 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20149.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20150 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20151 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20151.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20152 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20152.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20153 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20153.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20154 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20154.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20155 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20155.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20156 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20156.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20157 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20157.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20158 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20158.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20159 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20159.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20160 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10161 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10161.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10162 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10162.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10163 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10163.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10164 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10164.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10165 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10165.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10166 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10166.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10167 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10167.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10168 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10168.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-10169 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-10169.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20170 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &
+
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20171 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20171.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20172 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20172.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20173 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20173.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20174 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20174.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20175 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20175.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20176 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20176.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20177 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20177.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20178 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20178.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20179 -z az-aurora-01 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20179.out &
+#./sg_make_engine_nlps.sh -a sgden1 -h nlpd-pr-20180 -z az-aurora-02 -e SGPROD -s NLPD &>nlp-build-out/nlpd-pr-20050.out &

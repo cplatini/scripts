@@ -1,0 +1,19 @@
+# CONFIG FILE FOR PROVISIONING
+
+# COMMON CINDER ENVS
+#export CINDER_ENDPOINT_TYPE=internalURL
+
+# COMMON NOVA ENVS
+#export NOVA_ENDPOINT_TYPE=internalURL
+
+# Nova authentivation information
+export OS_USERNAME="3M-admin"
+export OS_PASSWORD="VhJk2W9AfFSN"
+export OS_TENANT_NAME="3M-admin"
+export OS_AUTH_URL="http://172.29.236.10:5000/v2.0"
+export OS_AUTH_STRATEGY="keystone"
+export OS_NO_CACHE=1
+# The following lines can be omitted
+# export OS_TENANT_ID="d2b07b151f67479eb6f8bbc472dc157c"
+# export NOVACLIENT_INSECURE=1
+# Other variables are found in the set_caprod.env file

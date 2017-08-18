@@ -1,0 +1,12 @@
+# CONFIG FILE FOR PROVISIONING
+# Nova authentivation information
+export OS_USERNAME="SOA-CTEST"
+export OS_PASSWORD="nawETe6wEfrupRes"
+export OS_TENANT_NAME="SOA-ClientTest"
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+export OS_AUTH_STRATEGY="keystone"
+export OS_NO_CACHE=1
+# The following lines can be omitted
+# export OS_TENANT_ID="d2b07b151f67479eb6f8bbc472dc157c"
+# export NOVACLIENT_INSECURE=1
+# Other variables are found in the set_ct.env file

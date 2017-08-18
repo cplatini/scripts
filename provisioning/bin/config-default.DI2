@@ -1,0 +1,12 @@
+# CONFIG FILE FOR PROVISIONING
+# Nova authentivation information
+export OS_USERNAME="SOA-DI2"
+export OS_PASSWORD="zDNsg3N#C7Oi"
+export OS_TENANT_NAME="SOA-DI2"
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+export OS_AUTH_STRATEGY="keystone"
+export OS_NO_CACHE=1
+# The following lines can be omitted
+# export OS_TENANT_ID="e47bb36a5aae48eab97e68601af29d3e"
+# export NOVACLIENT_INSECURE=1
+# Other variables are found in the set_di2.env file

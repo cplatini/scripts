@@ -1,0 +1,361 @@
+#!/bin/bash
+###########################################
+# DEBUGGING
+###########################################
+# /bin/sh (usually is a symbolic link to bash)
+# /usr/bin/bash
+# /usr/bin/env bash
+# Debugging: set -x
+# set -x   # Print a trace of simple commands and their arguments
+###########################################
+# SCRIPT INFORMATION
+###########################################
+# t_DISK_DEV='/dev/sdb'
+# t_DISK_LABEL='extra_storage01'
+# t_DISK_PTYPE='gpt'
+# t_DISK_MAPPER_DIR='/dev/mapper/vg2-lv_data01'
+t_dev='/dev/'
+t_DISK_DEV="${t_DISK_DEV:=}"
+t_DISK_LABEL="${t_DISK_LABEL:=extra_storage_01}"
+t_DISK_PTYPE="${t_DISK_PTYPE:=}"
+t_LVM_DEV_MAPPER_DIR="${t_LVM_DEV_MAPPER_DIR:=}"
+###########################################
+# SCRIPT VERSION & EDITS
+###########################################
+s_build_date='[Thu Aug 13 19:40:02 UTC 2015]'
+s_build_update='[Thu Sep 10 19:40:21 UTC 2015]' # Change me, if changes are made
+s_org='3M HIS, Cloud Systems'
+s_author='Nicholas M. Houle'; # Add name ", name" when changes are made
+s_version='1.1.1'
+###########################################
+# FUNCTION: version_info
+# DESCRIPTION: echo the script version
+###########################################
+version_info() { 
+cat <<__SCRIPTVERSION__
+
+Script: $0
+
+${s_org}
+Author: ${s_author}
+Version: ${s_version}, ${s_build_update}
+
+__SCRIPTVERSION__
+
+  # Version, exit
+  exit $?
+}
+###########################################
+# FUNCTION: usage_info
+# DESCRIPTION: echo the script usage_info
+###########################################
+usage_info() { 
+cat <<__SCRIPTUSAGE__
+
+ Make LVM Partition: It's possible to invoke this script with command-line arguments.
+
+    Example: $0 -d [Device] -p [Partition Type] -g [LVM group] -l [LVM Lable] -m [LVM Dev Mapper Name]
+
+    Options:
+
+        Device: (WARNING: Do not use root's volume.)
+            vdb, sda, other
+
+        Partition Type: (msdos for disks up to 2 TB, gpt for disks over 2 TB)
+            msdos, gpt
+
+
+ WARNING: This script will erase the data on the device, so please use caution.
+
+__SCRIPTUSAGE__
+
+  exit $?
+}
+###########################################
+# FUNCTION: is_empty
+# DESCRIPTION: Check value is empty 
+# Parameters: 
+#   $1 = value to check
+###########################################
+function is_empty() {
+  t_param=$1
+  t_param="$(echo -e "${t_param}" | xargs)"
+  # Check value is not empty and a number
+  if [[ -z "${t_param}" ]]; then
+      # return 0, is empty
+      return 0
+  fi
+  # return 1, not empty
+  return 1
+}
+###########################################
+# FUNCTION: is_empty
+# DESCRIPTION: Check value is empty 
+# Parameters: 
+#   $1 = value to check
+###########################################
+function is_root() {
+t_param=$1
+r_param=$2
+# e_param=$3
+t_param="$(echo -e "${t_param}" | xargs)"
+r_param="$(echo -e "${r_param}" | xargs)"
+# e_param="$(echo -e "${e_param}" | xargs)"
+
+  # Check values are empty
+  if ( is_empty "${t_param}" ) || ( is_empty "${r_param}" ); then
+    echo -e "[ERROR]: Couldn't determine root's values. [ Failed ]"
+    return 0
+  fi
+
+  # Check value is equal to root
+  if [[ "${t_param}" == "${t_LVM_DEV_MAPPER_DIR}" ]]; then
+    echo -e "[EXIT]: ${t_param} == ${t_LVM_DEV_MAPPER_DIR}"
+    # return 0, matches root
+    return 0
+  fi
+
+  # Check value is equal to root
+  if ( printf "%s" "${t_DISK_DEV}" | egrep '^sda$' > /dev/null 2>&1 ) || ( printf "%s" "${t_DISK_DEV}" | egrep '^sda.$' > /dev/null 2>&1 ); then
+    echo -e "[EXIT]: ${r_param} contains 'sda'"
+      # return 0, matches root
+    return 0
+  fi
+
+  # Check value is equal to root
+  if ( printf "%s" "${t_DISK_DEV}" | egrep '^vda$' > /dev/null 2>&1 ) || ( printf "%s" "${t_DISK_DEV}" | egrep '^vda.$' > /dev/null 2>&1 ); then
+    echo -e "[EXIT]: ${r_param} contains 'vda'"
+      # return 0, matches root
+    return 0
+  fi
+
+  # Check value is equal to root
+  if [[ "sda1" == "${t_DISK_DEV}" ]]; then
+    echo -e "[EXIT]: ${r_param} == ${t_DISK_DEV}"
+    # return 0, matches root
+    return 0
+  fi
+
+  # Check value is equal to root
+  if [[ "${r_param}" == "${t_DISK_DEV}" ]]; then
+    echo -e "[EXIT]: ${r_param} == ${t_DISK_DEV}"
+    # return 0, matches root
+    return 0
+  fi
+
+  # return 1, not root
+  return 1
+}
+###########################################
+# DESCRIPTION: CHECK, VALIDATE, SET OPTIONS
+# getopts: init (param, param)
+# Must have all command-line options, except -v
+###########################################
+while getopts ":vd:p:g:l:m:" o; do
+    case "${o}" in
+        v)
+            # -v is used for version information
+            version_info
+            ;;
+        d)
+            # Get the API Name
+            t_DISK_DEV="${OPTARG}"
+            while [ -z "${t_DISK_DEV}" ]; do
+                # echo "(volume) VM volume: "
+                read -p "Dev Name, -d [devname]: " t_DISK_DEV;
+            done
+            ;;
+
+        p)
+            # Get the VM Host Name
+            t_DISK_PTYPE="${OPTARG}"
+            while [ -z "${t_DISK_PTYPE}" ]; do
+                # echo "(mapper) Device Mapper Name: "
+                read -p "Device Partition Type, -p [partitiontype]: " t_DISK_PTYPE;
+            done
+            ;;
+        g)
+            # Get the VM Host Name
+            t_LVM_GROUP="${OPTARG}"
+            while [ -z "${t_LVM_GROUP}" ]; do
+                # echo "(lvmgroup) Device Mapper Name: "
+                read -p "LVM Group, -g [lvmgroup]: " t_LVM_GROUP;
+            done
+            ;;
+        l)
+            # get/set the device lable name
+            t_DISK_LABEL="${OPTARG}"
+            while [ -z "${t_DISK_LABEL}" ]; do
+                # echo "(mapper) Device Mapper Name: "
+                read -p "LVM Device Lable, -m [devlable]: " t_DISK_LABEL;
+            done
+            ;;
+        m)
+            # Get the VM Host Name
+            t_LVM_DEV_MAPPER_DIR="${OPTARG}"
+            while [ -z "${t_LVM_DEV_MAPPER_DIR}" ]; do
+                # echo "(mapper) Device Mapper Name: "
+                read -p "LVM Device Mapper Name, -m [devmappername]: " t_LVM_DEV_MAPPER_DIR;
+            done
+            ;;
+        *)
+            usage_info
+            ;;
+    esac
+done
+
+shift $((OPTIND-1))
+###########################################
+# DESCRIPTION: CHECK VARIABLES
+# check for any empty variables and require them
+# run usage_info() and then param_init()
+###########################################
+if ( is_empty "${t_DISK_DEV}" ) || ( is_empty "${t_LVM_DEV_MAPPER_DIR}" ) || ( is_empty "${t_DISK_PTYPE}" ); then
+  echo -e "[ERROR]: Option was found to be empty [ Failed ]"
+  exit 1
+fi
+###########################################
+# LVM Group
+# DESCRIPTION:
+# Get the default volume group
+###########################################
+t_LVM_GROUP="${t_LVM_GROUP:=}"
+if ( is_empty "${t_LVM_GROUP}" ); then
+  echo -e "[ERROR]: No volume group specified [ Failed ]"
+  exit 1
+fi
+###########################################
+# INFORMATION
+# DESCRIPTION: 
+# Print script's purpose message to the console 
+###########################################
+cat <<__INFO__
+
+Creating NEW LVM partition: ${t_DISK_DEV}
+
+  Disk: ${t_dev}${t_DISK_DEV}
+  Lable: ${t_DISK_LABEL}
+  LVM Group: ${t_LVM_GROUP}
+  LVM Device Mapper: ${t_LVM_DEV_MAPPER_DIR}
+
+__INFO__
+###########################################
+# DESCRIPTION: CHECK ROOT
+# run is_root() for safety reasons
+###########################################
+# t_boot_device=$(findmnt -n -o SOURCE /boot | xargs)
+t_root_device_sg=$(grep /dev/sda1 /etc/mtab | awk -F'/' '{ print $3 }' | xargs)
+t_root_device_rax=$(grep /dev/vda1 /etc/mtab | awk -F'/' '{ print $3 }' | xargs)
+t_root_lvm=$(findmnt -n -o SOURCE / | xargs)
+cat <<__INFO__
+
+ Checking root's values against the extra volume
+
+  ROOT: 
+  ${t_root_lvm}
+  ${t_root_device_rax}
+
+  [NEW] Ephemeral Volume: (${t_DISK_LABEL})
+  ${t_LVM_DEV_MAPPER_DIR}
+  ${t_DISK_DEV}
+
+__INFO__
+
+if ( is_root "${t_root_lvm}" "${t_root_device_rax}" ); then
+  usage_info
+  exit 1
+fi
+###########################################
+# PARTED
+# DESCRIPTION: 
+# Print Details, create partition and LVM
+# Print the current partition(s) state
+###########################################
+echo -e "[INFO]: Checking for exisitng: ${t_dev}${t_DISK_DEV}"
+sudo /sbin/parted -s "${t_dev}${t_DISK_DEV}" print
+sleep 10
+
+# ensure the device isn't mounted already
+echo -e "[INFO]: Ensure device isn't mounted: ${t_DISK_DEV}"
+sudo umount "${t_dev}${t_DISK_DEV}" 
+sleep 5
+
+# create a gpt or msdos partition table (depending on ptype variable defined above)
+echo -e "[INFO]: Creating partition table on ${t_DISK_DEV}"
+sudo /sbin/parted -s -a optimal "${t_dev}${t_DISK_DEV}" mktable "${t_DISK_PTYPE}"
+sleep 5
+
+# create the partition, starting at 1MB which may be better with newer disks
+echo -e "[INFO]: Creating partition and setting the LVM flag on ${t_DISK_DEV}"
+sudo /sbin/parted -s -a optimal -- "${t_dev}${t_DISK_DEV}" unit compact mkpart primary ext4 "1M" "100%" set 1 lvm on
+sleep 5
+
+# wipefs on new or existing partitions when they're formatted
+echo -e "[INFO]: Performed Wipefs to avoid problems with old filesystem signatures"
+sudo /sbin/wipefs -a "${t_dev}${t_DISK_DEV}1"
+
+# Create physical volume on the device
+echo -e "[INFO]: Create physical volume on the device"
+sudo /sbin/pvcreate "${t_dev}${t_DISK_DEV}1"
+
+# Create volume grpup and add the physical volume
+echo -e "[INFO]: Create volume group and add the physical volume"
+sudo /sbin/vgcreate "${t_LVM_GROUP}" "${t_dev}${t_DISK_DEV}1"
+
+# Create logical volume on the physical volume
+echo -e "[INFO]: Create logical volume on the physical volume"
+sudo /sbin/lvcreate -l 100%FREE --name "${t_DISK_LABEL}" "${t_LVM_GROUP}"
+
+# Make filesystem on the LVM partition
+echo -e "[INFO]: Creating filesystem on the LVM partition: ${t_DISK_DEV}1"
+sudo /sbin/mkfs.ext4 -F -j -v -L "${t_DISK_LABEL}" "${t_LVM_DEV_MAPPER_DIR}"
+echo -e "[DONE]: Phase 1, hand-off to Puppet."
+###########################################
+# MOUNT NEW VOLUME
+# DESCRIPTION: 
+# Make mount directory
+# Backup and append to fstab new ephemeral mounts
+# Create new fstab with ephemeral storage device
+###########################################
+# Make mount directory
+# echo -e "[INFO]: Make mount directory /${t_DISK_LABEL}"
+# sudo mkdir "/${t_DISK_LABEL}"
+# # Check the status of the last command
+# if [[ ! $? = 0 ]]; then
+#   echo -e "[ERROR]: mkdir command failed to create directory [ Failed ]"
+#   exit 1
+# fi
+# # Backup and append to fstab new ephemeral mounts
+# echo "[Info]: Backup and append to fstab new cinder mounts"
+# sudo cp /etc/fstab{,.old}
+# if [[ ! $? = 0 ]]; then
+#   echo -e "[ERROR]: cp command failed to create fstab backup [ Failed ]"
+#   exit 1
+# fi
+# # Create new fstab with ephemeral storage device
+# echo -e "${t_LVM_DEV_MAPPER_DIR}" | awk -v t_DISK_LABEL="/${t_DISK_LABEL}" '{ print $1,"\t",t_DISK_LABEL,"\t\t","ext4","\t","defaults  1  2";}' | sudo tee -a /etc/fstab.ephemeral
+# cat /etc/fstab.ephemeral | sudo tee -a /etc/fstab > /dev/null 
+# sudo mount -a
+# echo -e "[DONE]: Phase 2 [ OK ]"
+###########################################
+# FINISH
+# DESCRIPTION: 
+# Guest OS, Print LVM Information.
+# $(df -hl -T -x tmpfs -x devtmpfs | sort -r)
+###########################################
+cat <<__INFO__
+#===========================================
+Date: $(date)
+
+Instance Extra Volume Information:
+
+$(sudo /sbin/parted "${t_dev}${t_DISK_DEV}" print)
+
+Disk: ${t_DISK_DEV}1
+  Lable: ${t_DISK_LABEL}
+  LVM Group: ${t_LVM_GROUP}
+  LVM Device Mapper: ${t_LVM_DEV_MAPPER_DIR}
+
+$(sudo /sbin/vgs)
+
+__INFO__

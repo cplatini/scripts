@@ -1,0 +1,25 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DATASTAX CASSANDRA
+
+# DOMAIN - Domain used for instance's FQDN
+DOMAIN='rs.3mhis.net'
+ENV='CLIENTTEST'
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=("redbox_default_linux","redbox_PROD_${ENV}_$AVAIL_ZONE")
+#PUPPET_GROUPS=("redbox_default_linux","redbox_DevINT-TEST001")
+
+# OPENSTACK OPTIONS
+#OS_FLAVOR='f44d1d61-5d2e-4c27-b96d-803724a7451f'  #This is for DevInt DSE
+#OS_FLAVOR='6e71a044-cbff-4373-abb2-c90e80a89226'   #This is for DevInt hadoop
+OS_FLAVOR='50bcd778-8646-4dc3-9653-cfd869f8a7e5' # This is Vertica flavor
+OS_IMAGE='84af9909-60f9-49eb-882c-b13df4ad602c'
+#OS_TENANT_NAME='SOA-ClientTest'
+
+#OS_NETWORK='cec150ce-fde3-4800-bfbc-ccddd0ff33e2'
+#OS_NETWORK='370c455f-bed9-4ea0-81cc-caa9d269be2b'
+OS_NETWORK='3ad2c1e5-6881-45c0-b37e-4e6b4fd68dfa' # revert back
+#OS_NETWORK='98039f9f-88f9-4aae-9cee-c76dc0d51ce6'
+#OS_SECURITY_GROUPS=('de56cc06-1ede-4841-a2e6-b6e45b6e1538')
+#OS_SECURITY_GROUPS=('a4a6e939-d647-41bc-99b4-d92fda1495b1')
+OS_KEYNAME='ProvisionSSH'

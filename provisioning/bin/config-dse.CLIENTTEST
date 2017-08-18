@@ -1,0 +1,12 @@
+# CONFIG FILE FOR PROVISIONING
+
+
+PAT_IPADDR="72.3.199.160"
+
+export OS_AUTH_URL="http://74.205.49.130:5000/v2.0"
+#export OS_TENANT_ID="d2b07b151f67479eb6f8bbc472dc157c"
+export OS_TENANT_NAME="SOA-ClientTest"
+export OS_USERNAME="SOA-CTEST"
+export OS_PASSWORD="nawETe6wEfrupRes"
+
+ENV_PK_NAME=clienttest_key.pem

@@ -1,0 +1,27 @@
+# PROPERTIES FILE FOR PROVISIONING
+# PRODUCT: REDBOX
+# COMPONENT: DEFAULT
+
+# DOMAIN - Domain used for instance's FQDN
+
+DOMAIN='rs.3mhis.net'
+ENV='DEVINT'
+
+# PUPPET_GROUPS - Array of groups instance should belong
+PUPPET_GROUPS=('soa_linux_local_basics',"redbox_PROD_${ENV}_$AVAIL_ZONE")
+NLPD_GROUP=('redbox_DI_NlpdEngine','soa_linux_nlp_auth')
+NLPR_GROUP=('redbox_DI_NlprEngine','soa_linux_nlp_auth')
+
+# OPENSTACK OPTIONS
+#OS_FLAVOR='53'
+OS_IMAGE='84af9909-60f9-49eb-882c-b13df4ad602c'
+#OS_FLAVOR='5e340991-6d2d-42e7-aa8b-3fb660d5c538'
+
+# | 3ad2c1e5-6881-45c0-b37e-4e6b4fd68dfa | R4-DATADI        | None |
+#OS_NETWORK='3ad2c1e5-6881-45c0-b37e-4e6b4fd68dfa'
+OS_NETWORK='8560b4b7-fd8c-4b4f-96b3-be785dfe707a'
+
+OS_SECURITY_GROUPS=('default')
+#$OS_SECURITY_GROUPS=('f0e6df8a-31e3-46ce-b5fd-447f61a227f1');
+
+OS_KEYNAME='ProvisionSSH'
